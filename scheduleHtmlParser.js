@@ -48,6 +48,12 @@ function parsePosition(position) {
     return position;
 }
 
+function parseDay(day) {
+    let d = parseInt(day) - 1;
+    if (d == 0) d = 7;
+    return d.toString();
+}
+
 function scheduleHtmlParser(html) {
     let result = [];
     const schedule = JSON.parse(html);
@@ -61,7 +67,7 @@ function scheduleHtmlParser(html) {
                 const name = c.courseName;
                 const teacher = c.teacherName;
                 const position = parsePosition(c.classroomName);
-                const day = c.dayOfWeek;
+                const day = parseDay(c.dayOfWeek);
                 const weeks = parseWeeks(c.weeks);
                 const sections = [parseInt(c.time)];
                 result.push({ name, teacher, position, day, weeks, sections });
